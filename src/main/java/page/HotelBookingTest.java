@@ -1,24 +1,15 @@
 package page;
-import com.sun.javafx.PlatformUtil;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
+
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.Select;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
+
 
 public class HotelBookingTest {
 
-	WebDriver driver;
-	
-	@BeforeTest
-	public void setDriver() {
-		setDriverPath();
-		driver = new ChromeDriver();
-		PageFactory.initElements(driver, this);
-	}
+    WebDriver driver;
 
     @FindBy(linkText = "Hotels")
     private WebElement hotelLink;
@@ -31,33 +22,44 @@ public class HotelBookingTest {
 
     @FindBy(id = "travellersOnhome")
     private WebElement travellerSelection;
+    
+    
+    public HotelBookingTest(WebDriver driver){
+        this.driver = driver;
+        
+        //This initElements method will create all WebElements
+        PageFactory.initElements(driver, this);
+    }
+    
+    public void clickHotel(){
+    	
+    	hotelLink.click();
+    }
+    
+    public void setLocality(String locality){
 
-    @Test
-    public void shouldBeAbleToSearchForHotels() {
-       
-
-        driver.get("https://www.cleartrip.com/");
-        hotelLink.click();
-
-        localityTextBox.sendKeys("Indiranagar, Bangalore");
-
-        new Select(travellerSelection).selectByVisibleText("1 room, 2 adults");
-        searchButton.click();
-
-        driver.quit();
+    	localityTextBox.sendKeys(locality);
 
     }
+    
+    public void setTraveller(String noOfRooms){
 
-    private void setDriverPath() {
-        if (PlatformUtil.isMac()) {
-            System.setProperty("webdriver.chrome.driver", "chromedriver");
-        }
-        if (PlatformUtil.isWindows()) {
-            System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
-        }
-        if (PlatformUtil.isLinux()) {
-            System.setProperty("webdriver.chrome.driver", "chromedriver_linux");
-        }
+    	travellerSelection.sendKeys(noOfRooms);
+
+    }
+    
+    public void clickSearch(){
+    	
+    	searchButton.click();
+    }
+    
+    public void shouldBeAbleToSearchForHotels(String locality,String noOfRooms){
+
+        this.clickHotel();
+        this.setLocality(locality);
+        this.setTraveller(noOfRooms);
+        this.searchButton.click();
+        
     }
 
 }
