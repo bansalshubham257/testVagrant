@@ -21,6 +21,7 @@ public class TestRunner {
 	WebDriver driver;
 	HotelBookingTest hotelBookingTest;
 	FlightBookingTest flightBookingTest;
+	SignInTest signInTest;
 	
 	@BeforeTest
 	public void setDriver() {
@@ -47,6 +48,14 @@ public class TestRunner {
 		boolean result = flightBookingTest.testThatResultsAppearForAOneWayJourney();
         //verify that result appears for the provided journey search
         Assert.assertTrue(result);
+	}
+	
+	@Test(priority=0)
+    public void test_SignIn() throws InterruptedException{
+		signInTest = new SignInTest(driver);
+		String error = signInTest.shouldThrowAnErrorIfSignInDetailsAreMissing();
+        //verify error message
+		Assert.assertTrue(error.contains("There were errors in your submission"));
 	}
 	
 	@AfterTest
