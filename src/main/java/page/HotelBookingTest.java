@@ -17,7 +17,7 @@ public class HotelBookingTest {
 	public void v() {
 		setDriverPath();
 		driver = new ChromeDriver();
-		
+		PageFactory.initElements(driver, this);
 	}
 
     @FindBy(linkText = "Hotels")
