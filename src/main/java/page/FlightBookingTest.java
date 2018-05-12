@@ -18,7 +18,7 @@ public class FlightBookingTest {
 WebDriver driver;
 	
 	@BeforeTest
-	public void v() {
+	public void setDriver() {
 		setDriverPath();
 		driver = new ChromeDriver();
 	}
@@ -27,7 +27,6 @@ WebDriver driver;
     @Test
     public void testThatResultsAppearForAOneWayJourney() {
 
-        setDriverPath();
         driver.get("https://www.cleartrip.com/");
         waitFor(2000);
         driver.findElement(By.id("OneWay")).click();

@@ -14,7 +14,7 @@ public class HotelBookingTest {
 	WebDriver driver;
 	
 	@BeforeTest
-	public void v() {
+	public void setDriver() {
 		setDriverPath();
 		driver = new ChromeDriver();
 		PageFactory.initElements(driver, this);
