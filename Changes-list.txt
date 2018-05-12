@@ -1,0 +1,15 @@
+1) Added Before Test Annotaion to configure chrome driver
+2) Added PageFactory.initElements to initialize the elements of the Page.
+3) Added Before Test Annotaion to configure chrome driver in FlightBookingTest Java File
+4) Corrected identifier id from toTag -> ToTag in FlightBookingTest file
+5) Added Before Test Annotaion to configure chrome driver in SignInTest
+6) Switching to frame modal_window to handle pop-up and click on signIn
+7) Creating package test and class TestRunner to make it abstract
+8) Creating test case for HotelBookingTest in TestRunner.
+9) Increased modularity of HotelBookingTest java file.
+10) Creating test case for FlightBookingTest in TestRunner
+11) Making FlightBookingTest java file more Modular.
+12) Creating test case for signInTest in TestRunner
+13) Making signInTest java file more Modular.
+
+Done
