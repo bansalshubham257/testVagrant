@@ -1,44 +1,34 @@
 package page;
-import com.sun.javafx.PlatformUtil;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.Select;
-import org.testng.Assert;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
 
 import java.util.List;
 
 public class FlightBookingTest {
-
-WebDriver driver;
 	
-	@BeforeTest
-	public void setDriver() {
-		setDriverPath();
-		driver = new ChromeDriver();
-	}
+	WebDriver driver;
+	
+	public FlightBookingTest(WebDriver driver){
+        this.driver = driver;
+    }
 
+	
+    public boolean testThatResultsAppearForAOneWayJourney() {
 
-    @Test
-    public void testThatResultsAppearForAOneWayJourney() {
-
-        driver.get("https://www.cleartrip.com/");
-        waitFor(2000);
         driver.findElement(By.id("OneWay")).click();
-
         driver.findElement(By.id("FromTag")).clear();
         driver.findElement(By.id("FromTag")).sendKeys("Bangalore");
-
+        
         //wait for the auto complete options to appear for the origin
-
+        
         waitFor(2000);
         List<WebElement> originOptions = driver.findElement(By.id("ui-id-1")).findElements(By.tagName("li"));
         originOptions.get(0).click();
+        
+        //............. changing toTag -> ToTag ..............
 
         driver.findElement(By.id("ToTag")).clear();
         driver.findElement(By.id("ToTag")).sendKeys("Delhi");
@@ -57,10 +47,7 @@ WebDriver driver;
 
         waitFor(5000);
         //verify that result appears for the provided journey search
-        Assert.assertTrue(isElementPresent(By.className("searchSummary")));
-
-        //close the browser
-        driver.quit();
+        return isElementPresent(By.className("searchSummary"));
 
     }
 
@@ -83,15 +70,4 @@ WebDriver driver;
         }
     }
 
-    private void setDriverPath() {
-        if (PlatformUtil.isMac()) {
-            System.setProperty("webdriver.chrome.driver", "chromedriver");
-        }
-        if (PlatformUtil.isWindows()) {
-            System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
-        }
-        if (PlatformUtil.isLinux()) {
-            System.setProperty("webdriver.chrome.driver", "chromedriver_linux");
-        }
-    }
 }
