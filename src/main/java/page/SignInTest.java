@@ -3,17 +3,23 @@ import com.sun.javafx.PlatformUtil;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 public class SignInTest {
 
-    WebDriver driver = new ChromeDriver();
+	WebDriver driver;
+	
+	@BeforeTest
+	public void setDriver() {
+		setDriverPath();
+		driver = new ChromeDriver();
+	}
 
     @Test
     public void shouldThrowAnErrorIfSignInDetailsAreMissing() {
-
-        setDriverPath();
 
         driver.get("https://www.cleartrip.com/");
         waitFor(2000);
